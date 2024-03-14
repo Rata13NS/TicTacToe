@@ -5,7 +5,7 @@ let boxes = [];
 let userContor = 1;
 let buttonContor = 0;
 let neither = 0;
-var stopfunction = true;
+let stopfunction = true;
 
 function createGrid() {
     for (let i = 0; i < 3; i++) {
