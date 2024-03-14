@@ -46,7 +46,7 @@ function statusGame() {
     } else if (boxes[3].textContent === boxes[4].textContent && boxes[4].textContent === boxes[5].textContent && boxes[4].textContent != '') {
         showWinner();
         restartButton();
-        stopfunction = flase;
+        stopfunction = false;
     } else if (boxes[6].textContent === boxes[7].textContent && boxes[7].textContent === boxes[8].textContent && boxes[7].textContent != '') {
         showWinner();
         restartButton();
