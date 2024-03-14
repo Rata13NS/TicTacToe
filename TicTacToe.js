@@ -32,7 +32,7 @@ function game() {
             }
             neitherOneWon();
             statusGame();
-          });
+          }, {once:true});
       });
 }
 
@@ -62,7 +62,7 @@ function statusGame() {
         showWinner();
         restartButton();
     } else if (neither === 9) {
-        winnerPlayer.innerHTML = "Neither one won!";
+        winnerPlayer.innerHTML = "Neither one won! Try a new game!";
         restartButton();
     }
 }
@@ -70,7 +70,7 @@ function statusGame() {
 function restartButton() {
     ++buttonContor;
     let button = document.createElement("button");
-    button.textContent="Restart game";
+    button.textContent="Restart the game";
     button.style.background = "rgba(0, 0, 255, 0.8)";
     winnerButton.appendChild(button);
     button.addEventListener('click', function() {
