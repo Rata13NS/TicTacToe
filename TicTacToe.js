@@ -72,10 +72,9 @@ function restartButton() {
     let button = document.createElement("button");
     button.textContent="Restart game";
     button.style.background = "rgba(0, 0, 255, 0.8)";
-    if (buttonContor === 1) {
-        winnerButton.appendChild(button);
-    }
+    winnerButton.appendChild(button);
     button.addEventListener('click', function() {
+        button.parentNode.removeChild(button);
         gridContainer.innerHTML = '';
         winnerPlayer.innerHTML = '';
         boxes = [];
