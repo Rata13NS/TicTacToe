@@ -3,6 +3,8 @@ let winnerPlayer = document.getElementById("statusWinner");
 let winnerButton = document.getElementById("winnerButton");
 let boxes = [];
 let userContor = 1;
+let buttonContor = 0;
+let neither = 0;
 
 function createGrid() {
     for (let i = 0; i < 3; i++) {
@@ -28,58 +30,74 @@ function game() {
               box.textContent = '0';
               userContor = 1;
             }
+            neitherOneWon();
             statusGame();
           });
       });
 }
 
 function statusGame() {
-    if (boxes[0] === boxes[1] && boxes[1] === boxes[2]) {
+    if (boxes[0].textContent === boxes[1].textContent && boxes[1].textContent === boxes[2].textContent && boxes[1].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[3] === boxes[4] && boxes[4] === boxes[5]) {
+    } else if (boxes[3].textContent === boxes[4].textContent && boxes[4].textContent === boxes[5].textContent && boxes[4].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[6] === boxes[7] && boxes[7] === boxes[8]) {
+    } else if (boxes[6].textContent === boxes[7].textContent && boxes[7].textContent === boxes[8].textContent && boxes[7].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[0] === boxes[3] && boxes[3] === boxes[6]) {
+    } else if (boxes[0].textContent === boxes[3].textContent && boxes[3].textContent === boxes[6].textContent && boxes[3].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[1] === boxes[4] && boxes[4] === boxes[7]) {
+    } else if (boxes[1].textContent === boxes[4].textContent && boxes[4].textContent === boxes[7].textContent && boxes[4].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[2] === boxes[5] && boxes[5] === boxes[8]) {
+    } else if (boxes[2].textContent === boxes[5].textContent && boxes[5].textContent === boxes[8].textContent && boxes[5].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[0] === boxes[4] && boxes[4] === boxes[8]) {
+    } else if (boxes[0].textContent === boxes[4].textContent && boxes[4].textContent === boxes[8].textContent && boxes[4].textContent != '') {
         showWinner();
         restartButton();
-    } else if (boxes[2] === boxes[4] && boxes[6] === boxes[8]) {
+    } else if (boxes[2].textContent === boxes[4].textContent && boxes[4].textContent === boxes[6].textContent && boxes[4].textContent != '') {
         showWinner();
+        restartButton();
+    } else if (neither === 9) {
+        winnerPlayer.innerHTML = "Neither one won!";
         restartButton();
     }
 }
 
 function restartButton() {
+    ++buttonContor;
     let button = document.createElement("button");
-        button.textContent="Restart game";
-        button.style.background = "rgba(0, 0, 255, 0.8)";
+    button.textContent="Restart game";
+    button.style.background = "rgba(0, 0, 255, 0.8)";
+    if (buttonContor === 1) {
         winnerButton.appendChild(button);
-        button.addEventListener('click', function() {
-            boxes = [];
-            userContor = 1;
-            createGrid();
-            game();
-          });
+    }
+    button.addEventListener('click', function() {
+        gridContainer.innerHTML = '';
+        winnerPlayer.innerHTML = '';
+        boxes = [];
+        userContor = 1;
+        createGrid();
+        game();
+    });
 }
 
 function showWinner() {
     if (userContor === 1) {
-        winnerPlayer.innerHTML = "The winner is Player 2";
+        winnerPlayer.innerHTML = "Conglaturations to Player 2! You are the winner!";
     } else {
-        winnerPlayer.innerHTML = "The winner is Player 1";
+        winnerPlayer.innerHTML = "Conglaturations to Player 1! You are the winner!";
     }
 }
 
-// Trebuie sa implementez o functionalitate astfel incat daca apas pe o casuta care deja a fost apasata, sa nu se modifice continutul;
+function neitherOneWon() {
+    neither = 0;
+    for (let i = 0; i < 9; i++) {
+        if (boxes[i].textContent != '') {
+            ++neither;
+        }
+    }
+}
