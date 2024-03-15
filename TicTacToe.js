@@ -2,10 +2,11 @@ let gridContainer = document.getElementById("gridContainer");
 let winnerPlayer = document.getElementById("statusWinner");
 let winnerButton = document.getElementById("winnerButton");
 let boxes = [];
-let userContor = 1;
-let buttonContor = 0;
+let userCounter = 1;
+let buttonCounter = 0;
 let neither = 0;
 let stopfunction = true;
+let currentPlayer;
 
 function createGrid() {
     for (let i = 0; i < 3; i++) {
@@ -25,12 +26,14 @@ function game() {
     boxes.forEach(function(box, index) {
         box.addEventListener('click', function() {
             if (stopfunction === false) return;
-            if (userContor === 1) {
+            if (userCounter === 1) {
               box.textContent = 'X';
-              userContor = 2;
+              currentPlayer = userCounter;
+              userCounter = 2;
             } else {
               box.textContent = '0';
-              userContor = 1;
+              currentPlayer = userCounter;
+              userCounter = 1;
             }
             neitherOneWon();
             statusGame();
@@ -78,7 +81,7 @@ function statusGame() {
 }
 
 function restartButton() {
-    ++buttonContor;
+    ++buttonCounter;
     let button = document.createElement("button");
     button.textContent="Restart the game";
     button.style.background = "rgba(0, 0, 255, 0.8)";
@@ -88,7 +91,7 @@ function restartButton() {
         gridContainer.innerHTML = '';
         winnerPlayer.innerHTML = '';
         boxes = [];
-        userContor = 1;
+        userCounter = 1;
         stopfunction = true;
         createGrid();
         game();
@@ -96,11 +99,7 @@ function restartButton() {
 }
 
 function showWinner() {
-    if (userContor === 1) {
-        winnerPlayer.innerHTML = "Conglaturations to Player 2! You are the winner!";
-    } else {
-        winnerPlayer.innerHTML = "Conglaturations to Player 1! You are the winner!";
-    }
+    winnerPlayer.innerHTML = "Conglaturations to Player " + currentPlayer + "! You are the winner!";
 }
 
 function neitherOneWon() {
