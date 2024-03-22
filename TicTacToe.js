@@ -98,7 +98,7 @@ function restartButton() {
 }
 
 function showWinner() {
-    winnerPlayer.innerHTML = currentPlayer + ' has won!';
+    winnerPlayer.innerHTML = currentPlayer + ' has won! Conglaturations!!!';
 }
 
 function neitherOneWon() {
